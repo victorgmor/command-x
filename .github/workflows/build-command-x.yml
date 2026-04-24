@@ -1,0 +1,43 @@
+name: Build Command X app
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build app (unsigned)
+        run: |
+          xcodebuild \
+            -project "Command X Free.xcodeproj" \
+            -scheme "Command X Free" \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Package app
+        run: |
+          APP_PATH="build/Build/Products/Release/Command X Free.app"
+          if [ ! -d "$APP_PATH" ]; then
+            echo "App bundle not found at: $APP_PATH"
+            exit 1
+          fi
+          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "Command-X-Free.app.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Command-X-Free-app
+          path: Command-X-Free.app.zip
+          if-no-files-found: error
