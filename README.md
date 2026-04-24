@@ -11,7 +11,6 @@ Command X Free adds the familiar Windows cut/paste behavior to macOS Finder, all
 - **Windows-like Cut/Paste**: Use `Cmd+X` to cut files and `Cmd+V` to paste/move them
 - **Finder Integration**: Works seamlessly with macOS Finder
 - **Menu Bar Icon**: Lightweight menu bar utility with scissors icon
-- **Hide/Show Option**: Toggle menu bar icon visibility with `Cmd+Shift+X` or through the menu
 - **Auto-launch Support**: Can be set to start automatically at login
 - **Accessibility Permissions**: Securely monitors keyboard events only when Finder is active
 
@@ -33,13 +32,11 @@ The only similar app on the Mac App Store costs $4, but file management should b
 3. Navigate to destination folder
 4. Press `Cmd+V` to paste/move the files
 
-## Version 2.0 Features
+## Menu Bar Icon Behavior
 
-- **Hide Menu Bar Icon**: Right-click the menu bar icon and select "Hide Menu Bar Icon"
-- **Multiple Restore Options**:
-  - Press `Cmd+Shift+X` from anywhere to show the icon again
-  - Use Terminal command if needed (instructions provided in-app)
-- **Persistent Settings**: Your visibility preference is remembered between app restarts
+- The menu bar icon is always visible.
+- There is no hide/show toggle in the menu.
+- `Cmd+Shift+X` is not used for icon visibility.
 
 ## Requirements
 
