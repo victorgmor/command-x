@@ -19,14 +19,19 @@ func keyEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent,
         return Unmanaged.passUnretained(event)
     }
 
-    // Cmd + X = Cut
-    if flags.contains(.maskCommand) && keyCode == 7 { // 'X' key code = 7
+    let hasOnlyCommand = flags.contains(.maskCommand)
+        && !flags.contains(.maskShift)
+        && !flags.contains(.maskAlternate)
+        && !flags.contains(.maskControl)
+
+    // Cmd + X = Cut (only plain Cmd+X, no extra modifiers)
+    if hasOnlyCommand && keyCode == 7 { // 'X' key code = 7
         hasCut = true
         sendKeyCombo(key: 8, flags: .maskCommand) // Cmd + C
         return nil
     }
     // Cmd + V = Paste
-    else if flags.contains(.maskCommand) && keyCode == 9 && hasCut { // 'V' key code = 9
+    else if hasOnlyCommand && keyCode == 9 && hasCut { // 'V' key code = 9
         sendKeyCombo(key: 9, flags: [.maskCommand, .maskAlternate]) // Option + Cmd + V
         hasCut = false
         return nil
